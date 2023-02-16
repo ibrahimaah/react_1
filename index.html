@@ -1,0 +1,96 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React CDN</title>
+    <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+        .banner-body{
+            padding : 10px 20px;
+            background-color: peachpuff;
+            border: 5px dotted lightblue;
+            margin: 20px 5px;
+            text-align: center;
+            font-size:20px;
+            font-weight: bold;
+        }
+    </style>
+
+</head>
+
+<body>
+    <!---- Here we learn how to use React in a website-->
+    <header>
+        React js project with cdn
+    </header>
+
+    <main id="react-cdn" class="banner"></main>
+
+    <footer>
+        This is footer
+    </footer>
+    
+    <script type="text/babel">
+        //React component is simply just a js function
+        /*component name must start with a capital letter (Banner)
+          that required
+        */
+        const Banner = ()=>{
+            let title = `Banner`
+            let address =`https://www.google.com`
+            const handleClick = e => {
+                console.log(`The address is ${address}`)
+                // console.log(e);
+                console.log(`Event target is ${e.target}`);
+            }
+            
+            /*
+                jsx stands for javaScript XML,
+                it allows us to write html and xml syntax inside js file
+                inside <script> tag,
+                when jsx is rendering to the dom then it will be compiled into js by babel 
+                then js inject our html code in the dom,
+                browser does not understand jsx then we have to compile it to js 
+                then it works,
+                in jsx in order to define a class to an html tag
+                then we can not write class="" because class is a reserved word in js,
+                - in jsx we only have one single root element , or we can say that
+                JSX expressions must have one parent element
+            */
+           //here we return a template which is jsx (not html)
+           //Any logic must be outside the return statement
+            return (
+                //we use curly braces to output dynamic data inside jsx template
+                //inside curly braces we can also write js expressions
+                //all event handlers in jsx must be camelCase
+                /*
+                //if we write handleClick() rather than handleClick then
+                 the function will be fired without clicking the button, we just need
+                 a reference to the function then if we click on the button then
+                 we invoke the function
+                */
+               //{ e => console.log(e) } this is inline function (Reference)
+                <div className="banner-body">
+                    <p>{title.toUpperCase()}</p>
+                    <p>Today's Date is : {new Date().toDateString()}</p>
+                    <a href={address} style={{ display:"block" }}>Google</a>
+                    <br/>
+                    <button onClick={handleClick}>Click</button>
+                    <br/><br/>
+                    <button onClick={ e => console.log(e) }>Inline event handler</button>
+                </div>
+            );
+        };
+        //Injecting the component in the html page
+        //Render the component to the DOM
+        ReactDOM.render(<Banner/>,document.querySelector('.banner'));
+
+
+    </script>
+    
+</body>
+
+</html>
